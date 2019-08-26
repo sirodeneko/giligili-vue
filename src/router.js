@@ -5,25 +5,40 @@ import Home from "./views/Home.vue";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    },
-	{
-	  path: "/postvideo",
-	  name: "postVideo",
-	  component: () =>
-	    import(/* webpackChunkName: "video" */ "./views/PostVideo.vue")
-	}
-  ]
+	routes: [{
+			path: "/",
+			name: "home",
+			component: Home,
+		},
+		{
+			path: "/about",
+			name: "about",
+			component: () =>
+				import( /* webpackChunkName: "about" */ "./views/About.vue"),
+		},
+		{
+			path: "/postvideo",
+			name: "postVideo",
+			component: () =>
+				import( /* webpackChunkName: "video" */ "./views/PostVideo.vue"),
+		},
+		{
+			path: "/video/gv:videoID",
+			name: "ShowVideo",
+			component: () => 
+			import('./views/ShowVideo.vue'),
+		},
+		{
+			path: "/login",
+			name: "Login",
+			component: () =>
+				import( /* webpackChunkName: "video" */ "./views/Login.vue"),
+		},
+		{
+			path: "/register",
+			name: "Register",
+			component: () => 
+			import('./views/Register.vue'),
+		}
+	]
 });
