@@ -1,8 +1,14 @@
 <template>
 	<div class="about">
-		<h1>(￣▽￣)"欢迎来到giligili</h1>
+		<div class="title">(￣▽￣)"欢迎来到giligili</div>
 		<div class="block">
 			<el-timeline>
+				<el-timeline-item timestamp="2019/8/27" placement="top">
+					<el-card>
+						<h4>更新 v1.0.3.1</h4>
+						<p>请使用验证码哦</p>
+					</el-card>
+				</el-timeline-item>
 				<el-timeline-item timestamp="2019/8/26" placement="top">
 					<el-card>
 						<h4>更新 v1.0.3</h4>
@@ -31,3 +37,15 @@
 		</div>
 	</div>
 </template>
+<style>
+	.title{
+		font-family: Microsoft Yahei;
+		font-weight: 500;
+		font-size: 30px;
+		padding: 20px;
+	}
+	.about {
+	    background: #d2e9fb url(../../public/background.bc72515.png) top/contain no-repeat;
+	    min-height: 55vw;
+	}
+</style>

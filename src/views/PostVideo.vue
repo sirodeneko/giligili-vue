@@ -61,7 +61,7 @@
 		},
 		methods: {
 			fnBeforeUpload(file) {
-				const isPNG = file.type === 'image/png';
+				const isPNG = (file.type === 'image/png' || file.type === 'image/jpeg');
 				const isLt2M = file.size / 1024 / 1024 < 2;
 				if (!isPNG) {
 					this.$message.error('上传头像图片只能是 PNG 格式!');
