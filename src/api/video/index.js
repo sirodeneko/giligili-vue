@@ -14,8 +14,16 @@ const getVideos = (start, limit) => axios.get('/api/v1/videos', {
 	}
 }).then(res => res.data);
 
+// 读取用户频列表
+const getUserVideos = (start, limit) => axios.get('/api/v1/user/videos', {
+	params: {
+		start,
+		limit
+	}
+}).then(res => res.data);
 export {
 	getVideos,
 	getVideo,
 	postVideo,
+	getUserVideos,
 };

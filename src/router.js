@@ -25,8 +25,8 @@ export default new Router({
 		{
 			path: "/video/gv:videoID",
 			name: "ShowVideo",
-			component: () => 
-			import('./views/ShowVideo.vue'),
+			component: () =>
+				import('./views/ShowVideo.vue'),
 		},
 		{
 			path: "/login",
@@ -37,8 +37,28 @@ export default new Router({
 		{
 			path: "/register",
 			name: "Register",
-			component: () => 
-			import('./views/Register.vue'),
+			component: () =>
+				import('./views/Register.vue'),
+		},
+		{
+			path: "/space",
+			name: "Space",
+			redirect: "/space/me",
+			component: () =>
+				import('./views/Space.vue'),
+			children: [{
+					path: "/space/me",
+					name: "Spaces",
+					component: () =>
+						import('./views/Spaces.vue'),
+				},
+				{
+					path: "/space/revise",
+					name: "UserRevise",
+					component: () =>
+						import('./views/UserRevise.vue'),
+				}
+			]
 		}
 	]
 });

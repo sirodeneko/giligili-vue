@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-	  <NavBar></NavBar>
+	  <div class="top-navbar">
+	  <div class="menubar"><NavBar></NavBar></div>
+	  </div>
 	  <router-view></router-view>
   </div>
 </template>
@@ -17,5 +19,14 @@ export default {
 </script>
 
 <style>
-	
+	.top-navbar{
+		width: 100%;
+		height: 60px;
+		background: #FFFFFF;
+		border-bottom: solid 1px #e6e6e6;
+	}
+	.menubar{
+		max-width: 1300px;
+		margin: 0 auto;
+	}
 </style>

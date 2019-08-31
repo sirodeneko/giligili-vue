@@ -1,5 +1,6 @@
 <template>
 	<div class="post-video">
+		<div class="main-contianer">
 		<h2>欢迎投稿：</h2>
 		<el-form ref="form" :model="form" label-width="80px">
 			<el-form-item label="标题" :rules="[{ required: true, message: '标题不能为空'},]">
@@ -16,7 +17,7 @@
 				 :show-file-list="false">
 					<img v-if="imageUrl" :src="imageUrl" class="avatar">
 					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-					<div class="el-upload__tip" slot="tip">只能上传png文件，且不超过500kb</div>
+					<div class="el-upload__tip" slot="tip">只能上传png/jpg文件，且不超过2M</div>
 				</el-upload>
 			</el-form-item>
 			<el-form-item label="视频">
@@ -33,6 +34,7 @@
 				<el-button type="primary" @click="onSubmit">立即创建</el-button>
 			</el-form-item>
 		</el-form>
+		</div>
 	</div>
 </template>
 <script>
@@ -64,7 +66,7 @@
 				const isPNG = (file.type === 'image/png' || file.type === 'image/jpeg');
 				const isLt2M = file.size / 1024 / 1024 < 2;
 				if (!isPNG) {
-					this.$message.error('上传头像图片只能是 PNG 格式!');
+					this.$message.error('上传头像图片只能是 PNG/JPG 格式!');
 				}
 				if (!isLt2M) {
 					this.$message.error('上传头像图片大小不能超过 2MB!');

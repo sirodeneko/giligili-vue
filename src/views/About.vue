@@ -1,5 +1,6 @@
 <template>
 	<div class="about">
+		<div class="main-contianer">
 		<div class="title">(￣▽￣)"欢迎来到giligili</div>
 		<div class="block">
 			<el-timeline>
@@ -34,6 +35,7 @@
 					</el-card>
 				</el-timeline-item>
 			</el-timeline>
+		</div>
 		</div>
 	</div>
 </template>

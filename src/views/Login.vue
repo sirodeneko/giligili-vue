@@ -1,5 +1,7 @@
 <template>
 	<div class="login">
+		<div class="main-contianer">
+		<div class="mycard">
 		<div class="title">登录：</div>
 		<el-form ref="form" :model="form" label-width="80px">
 			<el-form-item label="账号" :rules="[{ required: true, message: '账号不能为空'},]">
@@ -16,6 +18,7 @@
 				<el-button @click.native="onRegister">注册</el-button>
 			</el-form-item>
 		</el-form>
+		</div></div>
 	</div>
 
 </template>
@@ -47,14 +50,19 @@
 								message: res.msg,
 							});
 						} else {
+							this.$cookies.set("gin-ess","6666",3600*24*6); 
 							this.$notify({
 								title: '登录成功',
 								message: 'success',
 								type: 'success',
 							});
+							//传递信号给导航条组件
+							this.$bus.emit('myspace');
+							//跳转首页
 							this.$router.push({
 								name: 'home'
 							});
+							
 						}
 
 					}).catch((error) => {
@@ -86,10 +94,23 @@
 </script>
 
 <style>
+	.login{
+	/* 	///background:url(../../public/56784491_p0.jpg)  no-repeat; */
+	}
 	.title{
 		font-family: Microsoft Yahei;
 		font-weight: 500;
 		font-size: 30px;
 		padding: 20px;
+	}
+	.mycard{
+		margin: 0 auto;
+		padding: 10px;
+		    background: #fff;
+		    border: 1px solid #eee;
+		    border-radius: 4px;
+		    
+		    padding: 15px 20px;
+		    width: 700px;
 	}
 </style>

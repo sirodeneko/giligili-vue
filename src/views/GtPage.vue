@@ -36,7 +36,7 @@
 				if (this.flog == 1) {
 					this.$notify({
 						title: '验证成功',
-						message: `请登录`,
+						message:"",
 						type: 'success',
 					});
 					param=1;
