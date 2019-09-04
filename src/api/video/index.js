@@ -21,7 +21,11 @@ const getUserVideos = (start, limit) => axios.get('/api/v1/user/videos', {
 		limit
 	}
 }).then(res => res.data);
+//读排行榜
+const getRiVideo = () => axios.get('api/v1/rank/daily').then(res => res.data);
+
 export {
+	getRiVideo,
 	getVideos,
 	getVideo,
 	postVideo,

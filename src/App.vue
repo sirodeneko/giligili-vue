@@ -21,6 +21,7 @@ export default {
 <style>
 	.top-navbar{
 		width: 100%;
+		min-width: 1300px;
 		height: 60px;
 		background: #FFFFFF;
 		border-bottom: solid 1px #e6e6e6;

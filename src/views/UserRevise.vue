@@ -95,6 +95,7 @@
 					this.form.sign=res.data.sign;
 					this.form.sex=res.data.sex;
 					this.form.birthdays=res.data.birthday*1000;
+					this.imageUrl=res.data.avatar;
 				});
 				
 			},

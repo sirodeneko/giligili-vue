@@ -68,7 +68,7 @@
 		width: 100%;
 		padding-top: 150px;
 		height: 100px;
-		background-image: url(../../public/58481766424_p0.jpg);
+		background-image: url(https://giligili-img-av.oss-cn-hangzhou.aliyuncs.com/img/58481766424_p0.jpg);
 		border-bottom-right-radius: 5px;
 		border-bottom-left-radius: 5px;
 	}
