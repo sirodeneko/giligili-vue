@@ -3,7 +3,7 @@
 		<div class="main-contianer">
 			<div class="col-1">
 				<div class="my-videos">我的视频</div>
-				<div class="top" style="margin-bottom: 10px;">
+				<div class="my-top" style="margin-bottom: 10px;">
 					<el-row :gutter="20">
 						<el-col :span="6" v-for="video in videos" :key="video.id">
 							<el-card class="video-card" @click.native="goVideo(video)">
@@ -172,7 +172,9 @@
 	.myhome {
 		min-height: 600px;
 	}
-
+	.my-top{
+		min-height: 600px;
+	}
 	.col-1 {
 		margin-top: 10px;
 		background: #fff;
@@ -265,9 +267,6 @@
 		padding: 0 0 15px;
 	}
 
-	.top {
-		min-height: 600px;
-	}
 
 	.videoInof {
 		margin-top: 10px;

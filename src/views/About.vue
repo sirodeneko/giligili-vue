@@ -8,6 +8,18 @@
 		<div class="master-inof"></div>
 		<div class="block">
 			<el-timeline>
+				<el-timeline-item timestamp="2019/9/5" placement="top">
+					<el-card>
+						<h4>更新 v1.1.0.2</h4>
+						<p>播放界面更改，也许马上评论功能也会上线哦</p>
+					</el-card>
+				</el-timeline-item>
+				<el-timeline-item timestamp="2019/9/4" placement="top">
+					<el-card>
+						<h4>更新 v1.1.0.1</h4>
+						<p>排行榜更新and淦，页面居然出现布局bug了</p>
+					</el-card>
+				</el-timeline-item>
 				<el-timeline-item timestamp="2019/9/1" placement="top">
 					<el-card>
 						<h4>更新 v1.1.0.0</h4>

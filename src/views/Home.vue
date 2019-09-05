@@ -29,7 +29,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right">
+			<div class="home-right">
 				<div class="right-top">
 					排行榜
 				</div>
@@ -87,7 +87,7 @@
 					name: 'ShowVideo',
 					params: {
 						videoID: video.id,
-						userid: video.user
+						userID: video.user,
 					}
 				});
 			}
@@ -115,7 +115,7 @@
 		min-height: 600px;
 	}
 
-	.right {
+	.home-right {
 		border: 1px solid #eee;
 		border-radius: 4px;
 		float: right;
