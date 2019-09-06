@@ -8,7 +8,7 @@
 		<div class="video-beside">
 
 		</div>
-		<div class="post-video">
+		<div class="show-video">
 			<el-row>
 				<el-col>
 					<video-player class="video-player-box" ref="videoPlayer" :options="playerOptions">
@@ -159,7 +159,7 @@
 		margin-left: 8px;
 	}
 
-	.post-video {
+	.show-video {
 		width: 950px;
 		/* border-radius: 4px; */
 		overflow: hidden;

@@ -1,39 +1,39 @@
 <template>
 	<div class="post-video">
 		<div class="main-contianer">
-		<h2>欢迎投稿：</h2>
-		<el-form ref="form" :model="form" label-width="80px">
-			<el-form-item label="标题" :rules="[{ required: true, message: '标题不能为空'},]">
-				<el-input v-model="form.title"></el-input>
-			</el-form-item>
-			<!-- <el-form-item label="视频链接" :rules="[{ required: true, message: '链接不能为空'},]">
+			<h2>欢迎投稿：</h2>
+			<el-form ref="form" :model="form" label-width="80px">
+				<el-form-item label="标题" :rules="[{ required: true, message: '标题不能为空'},]">
+					<el-input v-model="form.title"></el-input>
+				</el-form-item>
+				<!-- <el-form-item label="视频链接" :rules="[{ required: true, message: '链接不能为空'},]">
 				<el-input type="url" v-model="form.url"></el-input>
 			</el-form-item> -->
-			<el-form-item label="描述">
-				<el-input type="textarea" v-model="form.info"></el-input>
-			</el-form-item>
-			<el-form-item label="视频封面" :rules="[{ required: true, message: '封面不能为空'},]">
-				<el-upload class="avatar-uploader" action="" label="描述" ref="upload" :before-upload="fnBeforeUpload" :http-request="fnUploadRequest"
-				 :show-file-list="false">
-					<img v-if="imageUrl" :src="imageUrl" class="avatar">
-					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-					<div class="el-upload__tip" slot="tip">只能上传png/jpg文件，且不超过2M</div>
-				</el-upload>
-			</el-form-item>
-			<el-form-item label="视频">
-				<el-upload class="upload-demo" action="" :before-upload="vBeforeUpload" :http-request="vUploadRequest" multiple
-				 :limit="1" :on-exceed="handleExceed">
-					<el-button size="small" type="primary">点击上传</el-button>
-					<div slot="tip" class="el-upload__tip">只能上传MP4文件，且请您自行压缩</div>
-				</el-upload>
-			</el-form-item>
-			<el-form-item>
-				<el-progress :percentage="percentage" :color="customColorMethod" :show-text="false"></el-progress>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="primary" @click="onSubmit">立即创建</el-button>
-			</el-form-item>
-		</el-form>
+				<el-form-item label="描述">
+					<el-input type="textarea" v-model="form.info"></el-input>
+				</el-form-item>
+				<el-form-item label="视频封面" :rules="[{ required: true, message: '封面不能为空'},]">
+					<el-upload class="avatar-uploader" action="" label="描述" ref="upload" :before-upload="fnBeforeUpload" :http-request="fnUploadRequest"
+					 :show-file-list="false">
+						<img v-if="imageUrl" :src="imageUrl" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+						<div class="el-upload__tip" slot="tip">只能上传png/jpg文件，且不超过2M</div>
+					</el-upload>
+				</el-form-item>
+				<el-form-item label="视频">
+					<el-upload class="upload-demo" action="" :before-upload="vBeforeUpload" :http-request="vUploadRequest" multiple
+					 :limit="1" :on-exceed="handleExceed">
+						<el-button size="small" type="primary">点击上传</el-button>
+						<div slot="tip" class="el-upload__tip">只能上传MP4文件，且请您自行压缩</div>
+					</el-upload>
+				</el-form-item>
+				<el-form-item>
+					<el-progress :percentage="percentage" :color="customColorMethod" :show-text="false"></el-progress>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="onSubmit">立即创建</el-button>
+				</el-form-item>
+			</el-form>
 		</div>
 	</div>
 </template>

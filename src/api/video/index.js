@@ -14,6 +14,9 @@ const getVideos = (start, limit) => axios.get('/api/v1/videos', {
 	}
 }).then(res => res.data);
 
+// 删除视频
+const deleteVideo = id => axios.delete(`/api/v1/video/${id}`).then(res => res.data);
+
 // 读取用户频列表
 const getUserVideos = (start, limit) => axios.get('/api/v1/user/videos', {
 	params: {
@@ -30,4 +33,5 @@ export {
 	getVideo,
 	postVideo,
 	getUserVideos,
+	deleteVideo,
 };

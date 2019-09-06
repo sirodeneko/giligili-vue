@@ -6,15 +6,21 @@
 				<div class="my-top" style="margin-bottom: 10px;">
 					<el-row :gutter="20">
 						<el-col :span="6" v-for="video in videos" :key="video.id">
-							<el-card class="video-card" @click.native="goVideo(video)">
-								<div class="atomimg">
+							<el-card class="video-card">
+								<div class="atomimg" @click="goVideo(video)">
 									<img class="video-avatar" :src="video.avatar" width="100%">
 								</div>
-								<div class="videoInof">
+								<div class="videoInof" @click="goVideo(video)">
 									<div class="video-title">{{video.title}}</div>
 									<div class="bottom clearfix" style="margin-top: 4px;">
 										<span class="video-info">{{video.Info.substring(0,35)}}</span>
 									</div>
+								</div>
+								<!-- @click="handDelete(video.id)" -->
+								<div class="video-more" @click="open(video.id)">
+									<el-tooltip class="item" effect="dark" content="删除本视频" placement="right" :hide-after="1000">
+										<img src="../../public/更多.png" width="18px">
+									</el-tooltip>
 								</div>
 							</el-card>
 						</el-col>
@@ -75,6 +81,43 @@
 			};
 		},
 		methods: {
+			open(val) {
+				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					API.deleteVideo(val).then((res) => {
+						if (res.status == 0) {
+							this.$message({
+								type: 'success',
+								message: '删除成功!！！！'
+							});
+
+						} else {
+							this.$notify.error({
+								title: '删除失败惹',
+								message: res.msg,
+							});
+						}
+						console.log(this.videos);
+						console.log(val);
+						this.videos.splice(val, 1)
+						this.$delete(this.videos, val);
+						console.log(this.videos);
+					}).catch((error) => {
+						this.$notify.error({
+							title: '删除失败惹',
+							message: error,
+						});
+					});
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '已取消删除'
+					});
+				});
+			},
 			handleSizeChange(val) {
 				this.limit = val;
 				this.load();
@@ -84,7 +127,7 @@
 				this.start = this.limit * (val - 1); // val 页面
 				this.load();
 			},
-			
+
 			load() {
 
 				API.getUserVideos(this.start, this.limit).then((res) => {
@@ -103,23 +146,23 @@
 						this.gsextxt = "淑女";
 					}
 					//console.log(res.data.birthday);
-					this.gbirthday=this.timestampToTime(res.data.birthday);
+					this.gbirthday = this.timestampToTime(res.data.birthday);
 				});
 			},
 			// 时间戳转换成时间
 			timestampToTime(cjsj) {
-				if(cjsj/10000000000<=1){
-					cjsj=cjsj*1000;
+				if (cjsj / 10000000000 <= 1) {
+					cjsj = cjsj * 1000;
 				}
 				var date = new Date(cjsj); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
 				//var Y = date.getFullYear() + '-';
 				var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-				var D = (date.getDate() < 10 ? '0'+date.getDate():date.getDate())+" ";
+				var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + " ";
 				//var h = date.getHours() + ':';
 				//var m = date.getMinutes() + ':';
 				//var s = date.getSeconds();
 				//return Y + M + D + h + m + s
-				return M+D;
+				return M + D;
 			},
 			goVideo(video) {
 				//$router.push 加上一层
@@ -172,9 +215,11 @@
 	.myhome {
 		min-height: 600px;
 	}
-	.my-top{
+
+	.my-top {
 		min-height: 600px;
 	}
+
 	.col-1 {
 		margin-top: 10px;
 		background: #fff;
@@ -270,7 +315,7 @@
 
 	.videoInof {
 		margin-top: 10px;
-		width: 100%;
+		width: 150px;
 		height: 0;
 		padding-bottom: 35%;
 		overflow: hidden;
@@ -296,9 +341,20 @@
 	}
 
 	.video-card {
-
-
+		position: relative;
 		margin-top: 10px;
 		cursor: pointer;
+	}
+
+	.el-card__body {
+		padding: 20px 20px 10px 20px;
+	}
+
+	.video-more {
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
 	}
 </style>
