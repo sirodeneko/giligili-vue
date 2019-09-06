@@ -100,11 +100,11 @@
 								message: res.msg,
 							});
 						}
-						console.log(this.videos);
-						console.log(val);
-						this.videos.splice(val, 1)
-						this.$delete(this.videos, val);
-						console.log(this.videos);
+						// console.log(this.videos);
+						// console.log(val);
+						// this.videos.splice(val, 1)
+						// this.$delete(this.videos, val);
+						// console.log(this.videos);
 					}).catch((error) => {
 						this.$notify.error({
 							title: '删除失败惹',
