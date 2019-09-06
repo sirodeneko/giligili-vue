@@ -1,5 +1,4 @@
 <template>
-	<div class="home">
 		<div class="main-contianer">
 			<div class="col-1">
 				<div class="my-videos">我的视频</div>
@@ -59,7 +58,6 @@
 
 			</div>
 		</div>
-	</div>
 </template>
 
 <script>
@@ -100,6 +98,7 @@
 								message: res.msg,
 							});
 						}
+						this.$root.reload();
 						// console.log(this.videos);
 						// console.log(val);
 						// this.videos.splice(val, 1)
@@ -212,9 +211,9 @@
 
 
 <style>
-	.myhome {
+	/* .myhome {
 		min-height: 600px;
-	}
+	} */
 
 	.my-top {
 		min-height: 600px;
