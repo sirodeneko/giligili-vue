@@ -8,6 +8,18 @@
 		<div class="master-inof"></div>
 		<div class="block">
 			<el-timeline>
+				<el-timeline-item timestamp="2019/9/19" placement="top">
+					<el-card>
+						<h4>更新 v1.1.0.4</h4>
+						<p>我们可以吐槽视频了</p>
+					</el-card>
+				</el-timeline-item>
+				<el-timeline-item timestamp="2019/9/7" placement="top">
+					<el-card>
+						<h4>更新 v1.1.0.3</h4>
+						<p>一不小心放错的视频支持删除了</p>
+					</el-card>
+				</el-timeline-item>
 				<el-timeline-item timestamp="2019/9/5" placement="top">
 					<el-card>
 						<h4>更新 v1.1.0.2</h4>
@@ -59,6 +71,7 @@
 			</el-timeline>
 		</div>
 		</div>
+		<el-backtop visibility-height=600></el-backtop>
 	</div>
 </template>
 <style>

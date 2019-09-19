@@ -26,7 +26,46 @@
 		<div class="video-inof">
 			{{video.Info}}
 		</div>
+		<div class="video-comment">
+			<div class="video-comment-head">
+				{{total+"  "}}评论
+			</div>
+			<div class="video-comment-input">
+				<div class="v-c-uavatar">
+					<el-avatar :size="50" :src="meCircleUrl"></el-avatar>
+				</div>
+				<div class="video-c-input">
+					<el-input type="textarea" :rows="3" placeholder="来吐槽吧(〜￣△￣)〜" v-model="form.text" maxlength="8888" show-word-limit>
+					</el-input>
+				</div>
+				<div class="video-c-ok">
+					<div class="video-c-button" @click="upComment">吐槽一下</div>
+				</div>
+			</div>
+			<div class="video-c-center">
+				<div class="video-c-card" v-for="comment in comments" :key="comment.id">
+					<div class="v-c-uavatar">
+						<el-avatar :size="50" :src="comment.user_url"></el-avatar>
+					</div>
+					<div class="v-c-name">{{comment.user_name}}</div>
+					<div class="v-c-text">{{comment.txet}}</div>
+					<div class="v-c-time">{{timestampToTime(comment.created_at)}}</div>
+					<div class="v-c-more" v-if="comment.me==1" @click="open(comment.id,index)">
+						<el-tooltip class="item" effect="dark" content="删除本评论" placement="right" :hide-after="1000">
+							<img src="../../public/更多.png" width="14px">
+						</el-tooltip>
+					</div>
+				</div>
+				<div class="blocks">
+					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-size="12" :page-sizes="[6, 12]"
+					 layout="total, prev, pager, next, jumper" :total="total">
+					</el-pagination>
+				</div>
+			</div>
+		</div>
+		<el-backtop visibility-height=500></el-backtop>
 	</div>
+	
 </template>
 
 <script>
@@ -46,6 +85,12 @@
 				circleUrl: "",
 				video_create_time: "",
 				video: {},
+				comment_head: "",
+				meCircleUrl: "",
+				//提交评论
+				form: {
+					text: "",
+				},
 				playerOptions: { //配置视频属性
 					//playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
 					muted: false,
@@ -55,11 +100,56 @@
 						src: '',
 					}],
 					//poster: "",
-				}
+				},
+				//评论
+				comments: [],
+				start: 0,
+				limit: 20,
+				total: 0,
 			}
 		},
 		methods: {
-
+			handleSizeChange(val) {
+				this.limit = val;
+				API.getVideoComments(this.$route.params.videoID, this.start, this.limit).then((res) => {
+					this.comments = res.data.items;
+					this.total = res.data.total;
+				});
+			
+			},
+			handleCurrentChange(val) {
+				this.start = this.limit * (val - 1); // val 页面
+				API.getVideoComments(this.$route.params.videoID, this.start, this.limit).then((res) => {
+					this.comments = res.data.items;
+					this.total = res.data.total;
+				});
+			},
+			open(val,index) {
+				this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					API.deleteVideoComment(val).then((res) => {
+						if (res.status != 0) {
+							this.$message.error('删除失败');
+						} else {
+							this.$message({
+								message: '发布成功',
+								type: 'success'
+							});
+							this.comments.splice(index, 1);
+						}
+					}).catch((error) => {
+						this.$message.error('删除失败惹');
+					});
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '已取消删除'
+					});
+				});
+			},
 			// 时间戳转换成时间
 			timestampToTime(cjsj) {
 				if (cjsj / 10000000000 <= 1) {
@@ -85,14 +175,42 @@
 					this.loadafter(this.video.user);
 				});
 
+				APIs.getMe().then((res) => {
+					if (res.data.avatar != "") {
+						this.meCircleUrl = res.data.avatar;
+					}
+				});
+
+				API.getVideoComments(this.$route.params.videoID, this.start, this.limit).then((res) => {
+					this.comments = res.data.items;
+					this.total = res.data.total;
+				});
+
 			},
 			loadafter(userid) {
-				console.log(userid);
+				//console.log(userid);
 				APIs.getUser(userid).then((res) => {
 					if (res.data.avatar != "") {
 						this.circleUrl = res.data.avatar;
 						this.uname = res.data.nickname;
 						this.usign = res.data.sign;
+					}
+				});
+			},
+			upComment() {
+				API.postVideoComment(this.$route.params.videoID, this.form).then((res) => {
+					if (res.status != 0) {
+						this.$message.error('发布失败惹');
+					} else {
+						this.$message({
+							message: '发布成功',
+							type: 'success'
+						});
+						this.form.text = "";
+						API.getVideoComments(this.$route.params.videoID, this.start, this.limit).then((res) => {
+							this.comments = res.data.items;
+							this.total = res.data.total;
+						});
 					}
 				});
 			}
@@ -111,6 +229,7 @@
 <style>
 	#show-video {
 		background: #FFFFFF;
+		    font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
 	}
 
 	.video-top {
@@ -168,7 +287,7 @@
 	}
 
 	.video-master {
-		width: 950px;
+		width: 940px;
 		height: 54px;
 		margin-left: 10px;
 		margin-top: 10px;
@@ -210,9 +329,137 @@
 		color: #212121;
 		letter-spacing: 0;
 		line-height: 18px;
-		min-height: 60px;
+		min-height: 10px;
 		width: 700px;
 		overflow: hidden;
-		margin-left: 58px;
+		margin-left: 10px;
+		margin-right: 10px;
+		padding-left: 48px;
+		padding-right: 182px;
+		border-bottom: 1px solid #e5e9ef;
+	}
+
+	.video-comment {
+		width: 950px;
+		/* height: 300px; */
+	}
+
+	.video-comment-head {
+		font-size: 18px;
+		line-height: 24px;
+		color: #222;
+		width: 930px;
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+
+	.video-comment-input {
+		margin-top: 10px;
+		height: 90px;
+		width: 940px;
+		margin-left: 20px;
+	}
+
+	.v-c-uavatar {
+		margin-top: 18px;
+		float: left;
+		width: 50px;
+		height: 50px;
+		border: 2px solid hsla(0, 0%, 100%, .4);
+		border-radius: 52px;
+	}
+
+	.video-c-input {
+		float: left;
+		color: #0000FF;
+		width: 700px;
+		height: 90px;
+		margin-left: 30px;
+	}
+
+	.el-textarea__inner {
+		font-family: inherit;
+		resize: none;
+		height: 90px;
+	}
+
+	.video-c-ok {
+		float: left;
+		width: 90px;
+		height: 90px;
+		margin-left: 20px;
+	}
+
+	.video-c-button {
+		color: #fff;
+		padding: 26px;
+		border-radius: 4px;
+		text-align: center;
+		cursor: pointer;
+		background-color: #00a1d6;
+		border: 1px solid #00a1d6;
+		transition: .1s;
+		height: 36px;
+		width: 36px;
+		font-size: 16px;
+	}
+
+	.video-c-button:hover {
+		background-color: #00B5E5;
+	}
+
+	.video-c-center {
+		
+		margin-left: 20px;
+		width: 930px;
+		min-height: 200px;
+	}
+
+	.video-c-card {
+		padding-top: 3px;
+		position: relative;
+	}
+
+	.v-c-name {
+		height: 30px;
+		padding-top: 18px;
+		margin-left: 84px;
+		font-size: 15px;
+		font-weight: 500;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		color: #6d757a;
+		    
+	}
+
+	.v-c-text {
+		margin-left: 84px;
+		width: 846px;
+		line-height: 20px;
+		padding: 2px 0;
+		font-size: 14px;
+		text-shadow: none;
+		overflow: hidden;
+		word-wrap: break-word;
+		word-break: break-word;
+		white-space:pre-wrap;
+	}
+	.v-c-time{
+		font-size: 13px;
+		color: #B39999;
+		line-height: 15px;
+		height: 15px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #e5e9ef;
+		margin-left: 84px;
+		margin-top: 5px;
+	}
+	.v-c-more{
+		position: absolute;
+		right: 5px;
+		bottom: 8px;
+		width: 18px;
+		height: 18px;
+		cursor: pointer;
 	}
 </style>

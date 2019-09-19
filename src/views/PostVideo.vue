@@ -162,6 +162,9 @@
 							message: `您的投稿ID为${res.data.id}`,
 							type: 'success',
 						});
+						this.$router.push({
+							name: 'Space'
+						});
 					}
 
 				}).catch((error) => {

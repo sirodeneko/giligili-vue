@@ -1,7 +1,9 @@
 .DS_Store
 node_modules
 /dist
-
+build.sh
+操作
+docker/dist
 # local env files
 .env.local
 .env.*.local

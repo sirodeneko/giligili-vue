@@ -4,7 +4,7 @@
 				<div class="my-videos">我的视频</div>
 				<div class="my-top" style="margin-bottom: 10px;">
 					<el-row :gutter="20">
-						<el-col :span="6" v-for="video in videos" :key="video.id">
+						<el-col :span="6" v-for="(video,index) in videos" :key="video.id">
 							<el-card class="video-card">
 								<div class="atomimg" @click="goVideo(video)">
 									<img class="video-avatar" :src="video.avatar" width="100%">
@@ -16,7 +16,7 @@
 									</div>
 								</div>
 								<!-- @click="handDelete(video.id)" -->
-								<div class="video-more" @click="open(video.id)">
+								<div class="video-more" @click="open(video.id,index)">
 									<el-tooltip class="item" effect="dark" content="删除本视频" placement="right" :hide-after="1000">
 										<img src="../../public/更多.png" width="18px">
 									</el-tooltip>
@@ -79,7 +79,7 @@
 			};
 		},
 		methods: {
-			open(val) {
+			open(val,index) {
 				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
@@ -91,17 +91,15 @@
 								type: 'success',
 								message: '删除成功!！！！'
 							});
-
+							this.videos.splice(index, 1);
 						} else {
 							this.$notify.error({
 								title: '删除失败惹',
 								message: res.msg,
 							});
 						}
-						this.$root.reload();
 						// console.log(this.videos);
 						// console.log(val);
-						// this.videos.splice(val, 1)
 						// this.$delete(this.videos, val);
 						// console.log(this.videos);
 					}).catch((error) => {
