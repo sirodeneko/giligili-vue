@@ -162,13 +162,14 @@
 				return M + D;
 			},
 			goVideo(video) {
-				//$router.push 加上一层
-				this.$router.push({
+				let routeUrl = this.$router.resolve({
 					name: 'ShowVideo',
 					params: {
-						videoID: video.id
+						videoID: video.id,
+						userID: video.user,
 					}
 				});
+				window.open(routeUrl.href, '_blank');
 			},
 			gexit() {
 				APIs.Exit().then((res) => {

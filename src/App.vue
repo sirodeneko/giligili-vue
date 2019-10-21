@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style>
+
 	.top-navbar{
 		width: 100%;
 		min-width: 1300px;

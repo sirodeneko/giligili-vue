@@ -1,7 +1,7 @@
 <template>
 	<div class="main-contianer" id="show-video">
 		<div class="video-top">
-			<div class="video-title">{{video.title}}</div>
+			<div class="video-titlee">{{video.title}}</div>
 			<div class="video-create-time">{{video_create_time}}</div>
 			<div class="video-view">播放:{{video.view}}</div>
 		</div>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="video-comment">
 			<div class="video-comment-head">
-				{{total+"  "}}评论
+				{{total+" "}}评论
 			</div>
 			<div class="video-comment-input">
 				<div class="v-c-uavatar">
@@ -57,15 +57,21 @@
 					</div>
 				</div>
 				<div class="blocks">
-					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-size="12" :page-sizes="[6, 12]"
-					 layout="total, prev, pager, next, jumper" :total="total">
+					<el-pagination 
+					@size-change="handleSizeChange" 
+					@current-change="handleCurrentChange" 
+					:page-size="20" 
+					:page-sizes="[10, 20]"
+					 layout="total, prev, pager, next, jumper" 
+					 :total="total" 
+					 :hide-on-single-page="true">
 					</el-pagination>
 				</div>
 			</div>
 		</div>
-		<el-backtop visibility-height=500></el-backtop>
+		<el-backtop :visibility-height="600"></el-backtop>
 	</div>
-	
+
 </template>
 
 <script>
@@ -106,6 +112,7 @@
 				start: 0,
 				limit: 20,
 				total: 0,
+				value: true,
 			}
 		},
 		methods: {
@@ -115,7 +122,7 @@
 					this.comments = res.data.items;
 					this.total = res.data.total;
 				});
-			
+
 			},
 			handleCurrentChange(val) {
 				this.start = this.limit * (val - 1); // val 页面
@@ -124,7 +131,7 @@
 					this.total = res.data.total;
 				});
 			},
-			open(val,index) {
+			open(val, index) {
 				this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
@@ -135,10 +142,11 @@
 							this.$message.error('删除失败');
 						} else {
 							this.$message({
-								message: '发布成功',
+								message: '删除成功',
 								type: 'success'
 							});
 							this.comments.splice(index, 1);
+							this.total--;
 						}
 					}).catch((error) => {
 						this.$message.error('删除失败惹');
@@ -229,7 +237,7 @@
 <style>
 	#show-video {
 		background: #FFFFFF;
-		    font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
+		font-family: Microsoft YaHei, Arial, Helvetica, sans-serif;
 	}
 
 	.video-top {
@@ -247,7 +255,7 @@
 		background: #FFFFFF;
 	}
 
-	.video-title {
+	.video-titlee {
 		font-size: 21px;
 		font-weight: 500;
 		color: #212121;
@@ -409,7 +417,7 @@
 	}
 
 	.video-c-center {
-		
+
 		margin-left: 20px;
 		width: 930px;
 		min-height: 200px;
@@ -429,7 +437,7 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		color: #6d757a;
-		    
+
 	}
 
 	.v-c-text {
@@ -442,9 +450,10 @@
 		overflow: hidden;
 		word-wrap: break-word;
 		word-break: break-word;
-		white-space:pre-wrap;
+		white-space: pre-wrap;
 	}
-	.v-c-time{
+
+	.v-c-time {
 		font-size: 13px;
 		color: #B39999;
 		line-height: 15px;
@@ -454,7 +463,8 @@
 		margin-left: 84px;
 		margin-top: 5px;
 	}
-	.v-c-more{
+
+	.v-c-more {
 		position: absolute;
 		right: 5px;
 		bottom: 8px;

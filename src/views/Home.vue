@@ -82,14 +82,14 @@
 				});
 			},
 			goVideo(video) {
-				//$router.push 加上一层
-				this.$router.push({
+				let routeUrl = this.$router.resolve({
 					name: 'ShowVideo',
 					params: {
 						videoID: video.id,
 						userID: video.user,
 					}
 				});
+				window.open(routeUrl.href, '_blank');
 			}
 		},
 		beforeMount() {
@@ -158,12 +158,6 @@
 		border-radius: 4px;
 	}
 
-	.rivideo-avatar {
-		/* width: 100%;
-		height: 0;
-		padding-bottom: 80%;
-		overflow: hidden; */
-	}
 
 	.rivideo-title {
 		position: absolute;
@@ -219,5 +213,4 @@
 		margin: 0 auto;
 	}
 
-	.blocks {}
 </style>

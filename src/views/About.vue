@@ -10,6 +10,12 @@
 			<el-timeline>
 				<el-timeline-item timestamp="2019/9/19" placement="top">
 					<el-card>
+						<h4>更新 v1.1.0.5</h4>
+						<p>修复没登录就看不到评论的bug</p>
+					</el-card>
+				</el-timeline-item>
+				<el-timeline-item timestamp="2019/9/19" placement="top">
+					<el-card>
 						<h4>更新 v1.1.0.4</h4>
 						<p>我们可以吐槽视频了</p>
 					</el-card>
@@ -71,9 +77,27 @@
 			</el-timeline>
 		</div>
 		</div>
-		<el-backtop visibility-height=600></el-backtop>
+		<el-backtop :visibility-height="600"></el-backtop>
 	</div>
 </template>
+<script>
+	export default {
+		name: "About",
+		components: {},
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+			
+		},
+		beforeMount() {
+			//this.load();
+		},
+	};
+</script>
+
 <style>
 	.title{
 		font-family: Microsoft Yahei;
@@ -92,5 +116,6 @@
 	.about {
 	    background: #d2e9fb url(../../public/background.bc72515.png) top/contain no-repeat;
 	    min-height: 55vw;
+		min-width: 1300px;
 	}
 </style>

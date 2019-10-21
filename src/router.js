@@ -12,9 +12,9 @@ export default new Router({
 		},
 		{
 			path: "/about",
-			name: "about",
+			name: "About",
 			component: () =>
-				import( /* webpackChunkName: "about" */ "./views/About.vue"),
+				import('./views/About.vue'),
 		},
 		{
 			path: "/postvideo",
@@ -39,6 +39,12 @@ export default new Router({
 			name: "Register",
 			component: () =>
 				import('./views/Register.vue'),
+		},
+		{
+			path: "/im",
+			name: "IM",
+			component: () =>
+				import('./views/IM.vue'),
 		},
 		{
 			path: "/space",
