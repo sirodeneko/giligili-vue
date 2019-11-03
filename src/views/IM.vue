@@ -161,9 +161,10 @@ export default {
                 for (var j = 0; j < this.listRooms.length; j++) {
                   if (res.data.items != null) {
                     if (this.listRooms[j].id == res.data.items[0].to) {
-                      this.listRooms[j]["msgs"] = res.data.items;
+                      this.listRooms[j]["msgs"] = res.data.items.reverse();
                       if (j == 0) {
                         this.msgs = this.listRooms[0].msgs;
+                        this.scrollToBottom();
                         //console.log(this.msgs);
                       }
                       break;
@@ -265,6 +266,7 @@ export default {
       this.isFocus = index;
       this.chatMain = this.listRooms[this.isFocus];
       this.msgs = this.listRooms[this.isFocus].msgs;
+      this.scrollToBottom();
     },
     getMsg(redata) {
       //console.log(this.listRooms[0]);
@@ -286,10 +288,18 @@ export default {
       this.$nextTick(() => {
         console.log(3);
         if(f==1){
-          msg.scrollTop = msg.scrollHeight-msg.clientHeight // 滚动高度
+          msg.scrollTop = msg.scrollHeight-msg.clientHeight; // 滚动高度
           console.log(2);
         }
         
+      })
+    },
+    //滚动到底部
+    scrollToBottom(){
+      let msg = document.getElementById('im-c-msg');
+       //msg.scrollTop = msg.scrollHeight-msg.clientHeight;
+      this.$nextTick(() => {
+        msg.scrollTop = msg.scrollHeight-msg.clientHeight; // 滚动高度
       })
     },
     // 时间戳转换成时间
