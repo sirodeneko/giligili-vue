@@ -43,9 +43,11 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
-
+		<div class="beian" ><a href="http://www.miitbeian.gov.cn/" target="_blank"><center>赣ICP备19010523号-1</center></a></div>
 	</div>
+	
 </template>
 
 <script>
@@ -104,6 +106,11 @@
 	.home {
 		min-height: 640px;
 	}
+	.beian{
+		width: 1300px;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
 
 	.left {
 		float: left;
@@ -112,7 +119,7 @@
 	.top {
 
 		width: 1000px;
-		min-height: 600px;
+		min-height: 558px;
 	}
 
 	.home-right {
@@ -122,7 +129,7 @@
 		width: 288px;
 		margin-top: 10px;
 		margin-left: 10px;
-		min-height: 600px;
+		min-height: 590px;
 		background: #fff;
 	}
 

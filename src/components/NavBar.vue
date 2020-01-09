@@ -4,7 +4,7 @@
 		<el-menu-item class="el-menu-item" index="/postvideo">投稿视频</el-menu-item>
 		<el-menu-item class="el-menu-item" index="/login"  :style="{'display':disPlay1}">登录</el-menu-item>
 		<el-menu-item class="el-menu-item" index="/space"  :style="{'display':disPlay2}">个人中心</el-menu-item>
-		<el-menu-item class="el-menu-item" index="/im"  :style="{'display':disPlay2}">聊天室</el-menu-item>
+		<!-- <el-menu-item class="el-menu-item" index="/im"  :style="{'display':disPlay2}">聊天室</el-menu-item> -->
 		<el-menu-item class="el-menu-item" index="/about">关于giligili</el-menu-item>
 		<!-- <div style="position:absolute;right: 10px;top:-15px;color: #13CE66;">
 		<h1 >

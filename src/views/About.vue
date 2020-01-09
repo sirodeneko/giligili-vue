@@ -10,6 +10,12 @@
 			<el-timeline>
 				<el-timeline-item timestamp="2019/9/19" placement="top">
 					<el-card>
+						<h4>更新 v1.1.0.6</h4>
+						<p>被阿里云警告了加个备案号</p>
+					</el-card>
+				</el-timeline-item>
+				<el-timeline-item timestamp="2019/9/19" placement="top">
+					<el-card>
 						<h4>更新 v1.1.0.5</h4>
 						<p>修复没登录就看不到评论的bug</p>
 					</el-card>
