@@ -96,7 +96,7 @@
 					this.form.sex=res.data.sex;
 					this.form.birthdays=res.data.birthday*1000;
 					this.imageUrl=res.data.avatar;
-					this.form.avatar=res.data.avatar;
+					this.form.avatar=unescape(res.data.avatar);//将url字符串解码为正常字符串
 				});
 				
 			},
