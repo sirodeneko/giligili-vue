@@ -20,7 +20,7 @@
 						<el-radio label="保密"></el-radio>
 					</el-radio-group>
 				</el-form-item>
-				<el-form-item label="视频封面" :rules="[{ required: true, message: '封面不能为空'},]">
+				<el-form-item label="头像" :rules="[{ required: true, message: '封面不能为空'},]">
 					<el-upload class="avatar-uploader" action="" label="描述" ref="upload" 
 					:before-upload="fnBeforeUpload" 
 					:http-request="fnUploadRequest"
