@@ -96,13 +96,13 @@
 					this.form.sex=res.data.sex;
 					this.form.birthdays=res.data.birthday*1000;
 					this.imageUrl=res.data.avatar;
+					this.form.avatar=res.data.avatar;
 				});
 				
 			},
 			onSubmit() {
 				this.form.birthday=this.form.birthdays/1000;
 				console.log(this.form);
-				
 				API.putRevise(this.form).then((res) => {
 					if (res.status > 0) {
 						this.$notify.error({
