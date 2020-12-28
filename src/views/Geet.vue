@@ -16,24 +16,24 @@ export default {
       //   此url是极验官网的测试请求地址，加随机数防止缓存
       _this.axios
         .get(
-          "http://www.geetest.com/demo/gt/register-slide?t=" +
+          "https://www.geetest.com/demo/gt/register-slide?t=" +
             new Date().getTime()
         )
-        .then(res => {
+        .then((res) => {
           console.log("1,页面初始化，调用极验接口1，进行图形验证码的加载");
           // 极验第一次，请求回来的参数
           console.log(res);
           let data = res.data;
-          var handlerEmbed = function(captchaObj) {
+          var handlerEmbed = function (captchaObj) {
             //   图形验证成功
             captchaObj
-              .onSuccess(function() {
+              .onSuccess(function () {
                 var result = captchaObj.getValidate();
                 let param = {
                   geetest_challenge: result.geetest_challenge,
                   geetest_validate: result.geetest_validate,
                   geetest_seccode: result.geetest_seccode,
-                  status: data.success
+                  status: data.success,
                 };
                 // 极验校验的参数，将其传给服务端，进行校验。
                 console.log(
@@ -41,7 +41,7 @@ export default {
                 );
                 _this.$emit("geetPath", param);
               })
-              .onError(function() {
+              .onError(function () {
                 //   图形验证失败
               });
             //   为此页面的虚拟按钮添加点击事件
@@ -60,12 +60,12 @@ export default {
               challenge: data.challenge,
               product: "bind",
               offline: !data.success,
-              https: true
+              https: true,
             },
             handlerEmbed
           );
         });
-    }
+    },
   },
 
   computed: {},
@@ -78,11 +78,11 @@ export default {
   mounted() {},
   watch: {
     // 监听参数的变化，调用极验
-    isGeet: function() {
+    isGeet: function () {
       //   这里通过按钮事件调用极验
       this.$refs.btn.click();
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped></style>
